@@ -54,36 +54,32 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/landing_frag_container"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/grayOslo"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
-        <LinearLayout
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/landing_swipe"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="300dp"
-                android:background="#123fff" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/landing_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:fastScrollEnabled="true"
+                app:fastScrollHorizontalThumbDrawable="@drawable/recycler_fast_scroll_thumb_drawable"
+                app:fastScrollHorizontalTrackDrawable="@drawable/recycler_fast_scroll_line_drawable"
+                app:fastScrollVerticalThumbDrawable="@drawable/recycler_fast_scroll_thumb_drawable"
+                app:fastScrollVerticalTrackDrawable="@drawable/recycler_fast_scroll_line_drawable"
+                tools:listitem="@layout/post_card" />
+        </android.support.v4.widget.SwipeRefreshLayout>
 
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="300dp"
-                android:background="#12ffff" />
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="300dp"
-                android:background="#123fff" />
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </FrameLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

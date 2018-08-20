@@ -1,4 +1,5 @@
 <resources>
 
     <string name="toolbar_search_hint">Keyword search</string>
+    <string name="post_card_img_accessibility">First image</string>
 </resources>
