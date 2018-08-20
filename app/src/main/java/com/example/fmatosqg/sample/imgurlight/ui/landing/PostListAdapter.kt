@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.TransitionOptions
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.fmatosqg.sample.imgurlight.R
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
@@ -70,7 +73,11 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
         fun setData(postCardViewModel: PostCardViewModel) {
 
             with(postCardViewModel) {
-                imgBackground.setImageResource(R.drawable.singer)
+
+                Glide.with(viewContext)
+                        .load(imgUrl)
+                        .into(imgBackground)
+
                 txtDate.text = formatter.print(dateMs)
                 txtSubtitle.text = viewContext.resources.getQuantityString(R.plurals.post_card_subtitle, imgCount, imgCount)
             }

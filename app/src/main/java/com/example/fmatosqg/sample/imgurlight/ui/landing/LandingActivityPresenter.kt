@@ -11,7 +11,7 @@ class LandingActivityPresenter
 
     fun getData(keyword: String? = null): Single<List<PostCardViewModel>> {
 
-      return postRepository.getPosts(keyword?:"")
+        return postRepository.getPosts(keyword ?: "")
     }
 }
 

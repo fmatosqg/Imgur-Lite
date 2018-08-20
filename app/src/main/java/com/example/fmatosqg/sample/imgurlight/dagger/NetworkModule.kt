@@ -2,6 +2,7 @@ package com.example.fmatosqg.sample.imgurlight.dagger
 
 import android.app.Application
 import android.util.Log
+import com.example.fmatosqg.sample.imgurlight.domain.post.api.PostApi
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -16,10 +17,12 @@ import javax.inject.Singleton
 
 
 @Module
-class NetModule() {
+class NetworkModule() {
 
-    private val SERVER_HOSTNAME = "" // if having test+uat server move this to a string resource and inject it with dagger
 
+    companion object {
+        const val DOMAIN_NAME = "http://github.com"
+    }
 
     @Provides
     @Singleton
@@ -46,14 +49,26 @@ class NetModule() {
         return client.build()
     }
 
+
     @Provides
     @Singleton
-    internal fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(SERVER_HOSTNAME)
-                .build()
+    fun providesLeadsApi(httpClient: OkHttpClient,
+                         gson: Gson): PostApi {
+
+        val retrofit = buildRetrofit(httpClient, gson, DOMAIN_NAME)
+
+        return retrofit.create(PostApi::class.java)
     }
 
+
+    private fun buildRetrofit(httpClient: OkHttpClient, gson: Gson,
+                              serverDomainName: String): Retrofit {
+
+        return Retrofit.Builder()
+                .client(httpClient)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .baseUrl(serverDomainName)
+                .build()
+    }
 }

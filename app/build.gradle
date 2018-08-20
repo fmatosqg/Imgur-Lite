@@ -5,6 +5,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+apply from: 'secrets.gradle'
 
 android {
     compileSdkVersion 27
@@ -28,11 +29,14 @@ android {
         prod {
             buildConfigField "boolean", "hasMockedData", 'false'
 
+            buildConfigField "String", "clientId", "\"${secret.clientID}\""
             dimension "api"
         }
 
         mock {
             buildConfigField "boolean", "hasMockedData", 'true'
+
+            buildConfigField "String", "clientId", "\"${secret.clientID}\""
 
             applicationIdSuffix ".mock"
             dimension "api"
