@@ -4,9 +4,9 @@
     <string name="post_card_img_accessibility">First image</string>
     <string name="landing_server_data_error">An error happened while downloading data. Try again later.</string>
 
-    <plurals name="post_card_subtitle">
+    <string name="post_card_subtitle">No additional images found</string>
 
-        <item quantity="zero">No additional images found</item>
+    <plurals name="post_card_subtitle_plurals">
         <item quantity="one">%d additional image found</item>
         <item quantity="other">%d additional images found</item>
     </plurals>

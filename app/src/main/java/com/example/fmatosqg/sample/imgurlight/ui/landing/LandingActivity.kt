@@ -89,6 +89,7 @@ class LandingActivity : AppCompatActivity() {
 
     private fun search(keyword: String? = null, isSwitchActive: Boolean) {
 
+
         landing_swipe.isRefreshing = true
         compositeDisposable.clear()
 
@@ -99,6 +100,7 @@ class LandingActivity : AppCompatActivity() {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeBy(
                                 onSuccess = {
+                                    landing_list.scrollToPosition(0)
                                     postAdapter.setData(it)
                                     landing_swipe.isRefreshing = false
                                 },

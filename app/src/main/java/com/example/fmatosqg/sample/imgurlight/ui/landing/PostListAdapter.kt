@@ -29,7 +29,7 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
                 dataList[position]
             else {
                 PostCardViewModel("", 0, 0,
-                        0,0,0)
+                        0, 0, 0)
             }
         }
     }
@@ -98,7 +98,14 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
                         } else {
                             View.GONE
                         }
-                txtSubtitle.text = viewContext.resources.getQuantityString(R.plurals.post_card_subtitle, imgAdditionalCount, imgAdditionalCount)
+
+
+                txtSubtitle.text =
+                        if (imgAdditionalCount == 0) {
+                            viewContext.resources.getString(R.string.post_card_subtitle)
+                        } else {
+                            viewContext.resources.getQuantityString(R.plurals.post_card_subtitle_plurals, imgAdditionalCount, imgAdditionalCount)
+                        }
             }
         }
     }

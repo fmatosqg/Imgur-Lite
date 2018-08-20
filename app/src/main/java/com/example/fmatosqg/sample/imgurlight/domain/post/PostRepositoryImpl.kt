@@ -26,7 +26,7 @@ class PostRepositoryImpl
 
         return api
                 .map {
-                    Log.v("PostRepositoryImpl", "Look at data $it ")
+//                    Log.v("PostRepositoryImpl", "Look at data $it ")
 
                     convertToDomainModel(it, switchActive)
 
@@ -73,6 +73,8 @@ private fun PostResponse.convertToDomainModel(): PostCardViewModel {
                 0 -> 0
                 else -> imgCount - 1
             }
+
+//    Log.v("Count check", "count = $imgCount // additional = $imgAdditionalCount")
 
     return PostCardViewModel(
             imgUrl = firstUrl ?: "",

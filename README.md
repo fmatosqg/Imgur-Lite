@@ -11,4 +11,5 @@
 
 
 # Questions
-why use 'DD/MM/YYYY h:mm a' when 'dd/MM/YYYY H:mm a' seems to work better? Pls next time specify examples not specs ;)
+- why use 'DD/MM/YYYY h:mm a' when 'dd/MM/YYYY H:mm a' seems to work better? Pls next time specify examples not specs ;)
+- images were cropped to avoid OOM crashes, there are workarounds but PO needs to confirm which point in the trade off is desired.
