@@ -16,11 +16,15 @@ class PostRepositoryImpl
 
         val authorizationHeader = "Client-ID " + BuildConfig.clientId
 
-//        val sanitizedKeyword = if ( keyword.isNotBlank()) keyword else null
 
-        val sanitizedKeyword = "for"
-        return postApi
-                .getPosts(authorizationHeader, sanitizedKeyword)
+        val api =
+                if (keyword.isNotBlank())
+                    postApi.getPosts(authorizationHeader, keyword)
+                else
+                    postApi.getPosts(authorizationHeader)
+
+
+        return api
                 .map {
                     Log.v("PostRepositoryImpl", "Look at data $it ")
 
@@ -31,36 +35,32 @@ class PostRepositoryImpl
 
     private fun convertToDomainModel(searchResponse: SearchResponse): List<PostCardViewModel> {
 
-        if (searchResponse.data == null) {
-            return listOf()
+        return if (searchResponse.data == null) {
+            return listOf<PostCardViewModel>()
+        } else {
+            searchResponse
+                    .data
+                    .map { it.convertToDomainModel() }
+                    .sortedWith(compareByDescending { it.dateMs })
         }
-
-
-        val list = mutableListOf<PostCardViewModel>()
-
-        for (postResponse in searchResponse.data) {
-
-            list.add(postResponse.convertToDomainModel())
-        }
-
-        return list
 
     }
 }
 
 private fun PostResponse.convertToDomainModel(): PostCardViewModel {
 
-    val (firstUrl, dateTime) =
+
+    val firstUrl =
             images
                     ?.first()
                     ?.let {
-                        it.link to it.datetime
+                        it.link
                     }
-                    ?: null to null
+
 
     return PostCardViewModel(
             imgUrl = firstUrl ?: "",
-            dateMs = dateTime ?: 0,
+            dateMs = (datetime ?: 0) * 1000L,
             imgCount = images?.size ?: 0
 
     )

@@ -31,7 +31,7 @@
                 android:id="@+id/post_card_txt_date"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="12dp"
+
                 android:paddingEnd="@dimen/post_card_text_start_padding"
                 android:paddingStart="@dimen/post_card_text_start_padding"
                 android:paddingTop="12dp"
@@ -46,6 +46,7 @@
 
                 android:paddingEnd="@dimen/post_card_text_start_padding"
                 android:paddingStart="@dimen/post_card_text_start_padding"
+                android:paddingTop="12dp"
                 android:theme="@style/AppTheme.Text.Subtitle"
                 tools:text="Set of 20 images" />
 

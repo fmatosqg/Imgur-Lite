@@ -66,7 +66,8 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
     class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         companion object {
-            private val formatter = DateTimeFormat.forPattern("dd/MM/YYYY h:mm a")
+            // TODO this format looks better than DD/MM/YYYY h:mm a, double check
+            private val formatter = DateTimeFormat.forPattern("dd/MM/YYYY HH:mm a")
         }
 
         private val viewContext = itemView.context
@@ -81,16 +82,26 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
 
 
                 imgBackground.visibility = if (imgUrl.isNotBlank()) {
+
+                    imgBackground.setImageResource(R.drawable.imgur_fake_logo)
+
                     Glide.with(viewContext)
                             .load(imgUrl)
                             .into(imgBackground)
+
 
                     View.VISIBLE
                 } else {
                     View.GONE
                 }
 
-                txtDate.text = formatter.print(dateMs)
+                txtDate.visibility =
+                        if (dateMs != 0L) {
+                            txtDate.text = formatter.print(dateMs)
+                            View.VISIBLE
+                        } else {
+                            View.GONE
+                        }
                 txtSubtitle.text = viewContext.resources.getQuantityString(R.plurals.post_card_subtitle, imgCount, imgCount)
             }
         }

@@ -16,4 +16,10 @@ interface PostApi {
     ): Single<SearchResponse>
 
 
+    // only first page
+    @GET("/3/gallery/top/time/week/1")
+    fun getPosts(
+            @Header("Authorization") authorizationHeader: String
+    ): Single<SearchResponse>
+
 }
