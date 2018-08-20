@@ -16,4 +16,23 @@
 
     </style>
 
+
+    <!--Text themes-->
+    <style name="AppTheme.Text">
+        <item name="android:fontFamily">@font/lemon</item>
+
+    </style>
+
+    <style name="AppTheme.Text.Body1">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.Text.Subtitle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
+
+    </style>
+
+
 </resources>

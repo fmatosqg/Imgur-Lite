@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LandingActivity">
+    tools:context=".ui.landing.LandingActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/toolbar_appBarLayout"
@@ -30,6 +30,7 @@
                 android:orientation="horizontal">
 
                 <android.support.v7.widget.SearchView
+                    android:id="@+id/landing_search"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

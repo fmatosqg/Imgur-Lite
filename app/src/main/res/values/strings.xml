@@ -2,4 +2,13 @@
 
     <string name="toolbar_search_hint">Keyword search</string>
     <string name="post_card_img_accessibility">First image</string>
+    <string name="landing_server_data_error">An error happened while downloading data. Try again later.</string>
+
+    <plurals name="post_card_subtitle">
+
+        <item quantity="zero">No images found</item>
+        <item quantity="one">%d image found</item>
+        <item quantity="other">%d images found</item>
+    </plurals>
+
 </resources>
