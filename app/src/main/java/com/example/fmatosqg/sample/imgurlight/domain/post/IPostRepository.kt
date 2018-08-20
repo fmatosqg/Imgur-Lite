@@ -4,5 +4,5 @@ import com.example.fmatosqg.sample.imgurlight.ui.landing.PostCardViewModel
 import io.reactivex.Single
 
 interface IPostRepository {
-    fun getPosts(keyword: String): Single<List<PostCardViewModel>>
+    fun getPosts(keyword: String, switchActive: Boolean): Single<List<PostCardViewModel>>
 }

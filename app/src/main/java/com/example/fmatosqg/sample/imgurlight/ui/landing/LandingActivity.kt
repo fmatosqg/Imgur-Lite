@@ -7,7 +7,6 @@ import com.example.fmatosqg.sample.imgurlight.R
 import com.example.fmatosqg.sample.imgurlight.common.ImgurApplication
 
 import com.jakewharton.rxbinding2.support.v7.widget.*
-import com.jakewharton.rxbinding2.widget.RxTextSwitcher
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -22,6 +21,8 @@ class LandingActivity : AppCompatActivity() {
     private lateinit var postAdapter: PostListAdapter
 
     private var lastKeyword: String = "" // TODO good candidate for arch components view model
+    private var isSwitchActive = false
+
     private val compositeDisposable = CompositeDisposable()
 
     @Inject
@@ -54,7 +55,7 @@ class LandingActivity : AppCompatActivity() {
         landing_list.adapter = postAdapter
 
         landing_swipe.setOnRefreshListener {
-            search(lastKeyword)
+            search(lastKeyword, isSwitchActive)
         }
 
 
@@ -66,21 +67,34 @@ class LandingActivity : AppCompatActivity() {
                 .subscribeBy(
                         onNext = {
                             lastKeyword = it.toString()
-                            search(lastKeyword)
+                            search(lastKeyword, isSwitchActive)
                         }
                 )
 
-        search(lastKeyword)
+        landing_switch.setOnCheckedChangeListener { button, isChecked ->
+
+            isSwitchActive = isChecked
+            val message = if (isSwitchActive) {
+                R.string.landing_switch_snackbar_on
+            } else {
+                R.string.landing_switch_snackbar_off
+            }
+            snackbar(landing_switch, message)
+
+            search(lastKeyword, isSwitchActive)
+        }
+
+        search(lastKeyword, isSwitchActive)
     }
 
-    private fun search(keyword: String? = null) {
+    private fun search(keyword: String? = null, isSwitchActive: Boolean) {
 
         landing_swipe.isRefreshing = true
         compositeDisposable.clear()
 
         compositeDisposable.add(
                 landingActivityPresenter
-                        .getData(keyword)
+                        .getData(keyword, isSwitchActive)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeBy(

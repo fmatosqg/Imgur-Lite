@@ -9,9 +9,11 @@ import javax.inject.Singleton
 class LandingActivityPresenter
 @Inject constructor(private val postRepository: IPostRepository) {
 
-    fun getData(keyword: String? = null): Single<List<PostCardViewModel>> {
+    fun getData(keyword: String? = null, isSwitchActive: Boolean): Single<List<PostCardViewModel>> {
 
-        return postRepository.getPosts(keyword ?: "")
+        return postRepository
+                .getPosts(keyword ?: "", isSwitchActive)
+
     }
 }
 

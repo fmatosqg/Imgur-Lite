@@ -33,7 +33,8 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
             return if (dataList.size > position)
                 dataList[position]
             else {
-                PostCardViewModel("", 0, 0)
+                PostCardViewModel("", 0, 0,
+                        0,0,0)
             }
         }
     }
@@ -67,7 +68,7 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
 
         companion object {
             // TODO this format looks better than DD/MM/YYYY h:mm a, double check
-            private val formatter = DateTimeFormat.forPattern("dd/MM/YYYY HH:mm a")
+            private val formatter = DateTimeFormat.forPattern("dd/MM/YYYY H:mm a")
         }
 
         private val viewContext = itemView.context
@@ -112,5 +113,15 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
 data class PostCardViewModel(
         val imgUrl: String,
         val dateMs: Long,
-        val imgCount: Int
-)
+        val imgCount: Int,
+
+        val points: Long,
+        val score: Long,
+        val topicId: Long
+) {
+    fun isFilterTrue(): Boolean {
+
+        return (points + score + topicId) % 2 == 0L
+
+    }
+}

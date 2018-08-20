@@ -11,4 +11,6 @@
         <item quantity="other">%d images found</item>
     </plurals>
 
+    <string name="landing_switch_snackbar_on">Filter is turned on</string>
+    <string name="landing_switch_snackbar_off">Filter is turned off</string>
 </resources>

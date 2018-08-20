@@ -9,3 +9,6 @@
 - Run with flavor ProdDebug to hit imgur server
 - Run with flavor MockDebug or MockRelease to test UI with mocked data
 
+
+# Questions
+why use 'DD/MM/YYYY h:mm a' when 'dd/MM/YYYY H:mm a' seems to work better? Pls next time specify examples not specs ;)

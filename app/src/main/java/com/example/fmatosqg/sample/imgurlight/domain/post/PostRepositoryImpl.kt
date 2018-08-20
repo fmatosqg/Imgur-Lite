@@ -12,7 +12,7 @@ import javax.inject.Inject
 class PostRepositoryImpl
 @Inject constructor(private val postApi: PostApi)
     : IPostRepository {
-    override fun getPosts(keyword: String): Single<List<PostCardViewModel>> {
+    override fun getPosts(keyword: String, switchActive: Boolean): Single<List<PostCardViewModel>> {
 
         val authorizationHeader = "Client-ID " + BuildConfig.clientId
 
@@ -28,12 +28,12 @@ class PostRepositoryImpl
                 .map {
                     Log.v("PostRepositoryImpl", "Look at data $it ")
 
-                    convertToDomainModel(it)
+                    convertToDomainModel(it, switchActive)
 
                 }
     }
 
-    private fun convertToDomainModel(searchResponse: SearchResponse): List<PostCardViewModel> {
+    private fun convertToDomainModel(searchResponse: SearchResponse, switchActive: Boolean): List<PostCardViewModel> {
 
         return if (searchResponse.data == null) {
             return listOf<PostCardViewModel>()
@@ -41,6 +41,14 @@ class PostRepositoryImpl
             searchResponse
                     .data
                     .map { it.convertToDomainModel() }
+                    .filter {
+
+                        if (switchActive) {
+                            it.isFilterTrue()
+                        } else {
+                            true
+                        }
+                    }
                     .sortedWith(compareByDescending { it.dateMs })
         }
 
@@ -61,8 +69,11 @@ private fun PostResponse.convertToDomainModel(): PostCardViewModel {
     return PostCardViewModel(
             imgUrl = firstUrl ?: "",
             dateMs = (datetime ?: 0) * 1000L,
-            imgCount = images?.size ?: 0
+            imgCount = images?.size ?: 0,
 
+            points = points,
+            score = score,
+            topicId = topicId
     )
 
 }
