@@ -21,7 +21,7 @@ class NetworkModule() {
 
 
     companion object {
-        const val DOMAIN_NAME = "http://github.com"
+        const val DOMAIN_NAME = "https://api.imgur.com"
     }
 
     @Provides

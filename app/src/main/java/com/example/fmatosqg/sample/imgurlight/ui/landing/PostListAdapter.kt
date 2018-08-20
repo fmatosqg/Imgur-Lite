@@ -1,5 +1,7 @@
 package com.example.fmatosqg.sample.imgurlight.ui.landing
 
+import android.support.annotation.UiThread
+import android.support.annotation.WorkerThread
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -36,11 +38,14 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
         }
     }
 
+    @UiThread
     fun setData(dataList: List<PostCardViewModel>) {
         synchronized(this.dataList) {
             this.dataList.clear()
             this.dataList.addAll(dataList)
         }
+
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
@@ -74,9 +79,16 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
 
             with(postCardViewModel) {
 
-                Glide.with(viewContext)
-                        .load(imgUrl)
-                        .into(imgBackground)
+
+                imgBackground.visibility = if (imgUrl.isNotBlank()) {
+                    Glide.with(viewContext)
+                            .load(imgUrl)
+                            .into(imgBackground)
+
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
 
                 txtDate.text = formatter.print(dateMs)
                 txtSubtitle.text = viewContext.resources.getQuantityString(R.plurals.post_card_subtitle, imgCount, imgCount)
