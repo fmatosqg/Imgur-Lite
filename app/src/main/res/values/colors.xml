@@ -2,5 +2,10 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#44ffff</color>
+
+    <!-- Use this tool to name colors http://chir.ag/projects/name-that-color/#-->
+    <color name="grayOslo">#8D8E90</color>
+    <color name="grayAthens">#EEEEEE</color>
+
 </resources>
