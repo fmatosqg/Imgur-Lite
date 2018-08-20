@@ -66,10 +66,18 @@ private fun PostResponse.convertToDomainModel(): PostCardViewModel {
                     }
 
 
+    val imgCount = images?.size ?: 0
+
+    val imgAdditionalCount =
+            when (imgCount) {
+                0 -> 0
+                else -> imgCount - 1
+            }
+
     return PostCardViewModel(
             imgUrl = firstUrl ?: "",
             dateMs = (datetime ?: 0) * 1000L,
-            imgCount = images?.size ?: 0,
+            imgAdditionalCount = imgAdditionalCount,
 
             points = points,
             score = score,

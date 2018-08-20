@@ -6,9 +6,9 @@
 
     <plurals name="post_card_subtitle">
 
-        <item quantity="zero">No images found</item>
-        <item quantity="one">%d image found</item>
-        <item quantity="other">%d images found</item>
+        <item quantity="zero">No additional images found</item>
+        <item quantity="one">%d additional image found</item>
+        <item quantity="other">%d additional images found</item>
     </plurals>
 
     <string name="landing_switch_snackbar_on">Filter is turned on</string>

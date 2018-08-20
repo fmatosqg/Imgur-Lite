@@ -1,7 +1,6 @@
 package com.example.fmatosqg.sample.imgurlight.ui.landing
 
 import android.support.annotation.UiThread
-import android.support.annotation.WorkerThread
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.TransitionOptions
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.fmatosqg.sample.imgurlight.R
-import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
-import java.util.concurrent.ConcurrentLinkedQueue
 
 class PostListAdapter : RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
 
@@ -103,7 +98,7 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
                         } else {
                             View.GONE
                         }
-                txtSubtitle.text = viewContext.resources.getQuantityString(R.plurals.post_card_subtitle, imgCount, imgCount)
+                txtSubtitle.text = viewContext.resources.getQuantityString(R.plurals.post_card_subtitle, imgAdditionalCount, imgAdditionalCount)
             }
         }
     }
@@ -113,7 +108,7 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
 data class PostCardViewModel(
         val imgUrl: String,
         val dateMs: Long,
-        val imgCount: Int,
+        val imgAdditionalCount: Int,
 
         val points: Long,
         val score: Long,
