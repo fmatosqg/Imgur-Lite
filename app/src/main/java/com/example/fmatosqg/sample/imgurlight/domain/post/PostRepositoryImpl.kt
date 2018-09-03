@@ -26,7 +26,7 @@ class PostRepositoryImpl
 
         return api
                 .map {
-//                    Log.v("PostRepositoryImpl", "Look at data $it ")
+                    //                    Log.v("PostRepositoryImpl", "Look at data $it ")
 
                     convertToDomainModel(it, switchActive)
 
@@ -59,19 +59,21 @@ private fun PostResponse.convertToDomainModel(): PostCardViewModel {
 
 
     val firstUrl =
-            images
-                    ?.first()
-                    ?.let {
-                        it.link
-                    }
-
-
-    val imgCount = images?.size ?: 0
+            if (isAlbum == true) {
+                images
+                        ?.first()
+                        ?.let {
+                            it.link
+                        }
+            } else {
+                link
+            }
 
     val imgAdditionalCount =
-            when (imgCount) {
+            when (imagesCount) {
                 0 -> 0
-                else -> imgCount - 1
+                null -> 0
+                else -> imagesCount - 1
             }
 
 //    Log.v("Count check", "count = $imgCount // additional = $imgAdditionalCount")

@@ -9,7 +9,11 @@ data class PostResponse(val title: String?,
 
                         val points: Long,
                         val score: Long,
-                        val topicId: Long)
+                        val topicId: Long,
+
+                        val imagesCount: Int?,
+                        val isAlbum: Boolean?,
+                        val link: String?)
 
 data class PostImages(val link: String?,
                       val datetime: Long?)
